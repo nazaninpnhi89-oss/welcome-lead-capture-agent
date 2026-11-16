@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SYNIQ AI Welcome Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>__CSS__</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand"><b>SYNIQ</b> AI</div>
+    <div class="tag">Case study · Sales automation</div>
+  </header>
+
+  <div class="hero">
+    <h1>Every DM gets a reply in seconds. <em>Serious buyers</em> go straight to sales.</h1>
+    <p>The SYNIQ AI Welcome Assistant reads each new contact's message with AI, picks out their name and what they need, logs them in a database, sends a personal welcome, and alerts your sales team the moment someone is ready to buy.</p>
+  </div>
+
+  <div class="demo" id="demo">
+    <div class="demo-head">
+      <h3>Try it: pick a message</h3>
+      <span>Real system output on sample messages</span>
+    </div>
+    <div class="picker" id="picker" role="group" aria-label="Sample messages"></div>
+    <div id="stageWrap" class="animate">
+      <div class="flow" id="flow"></div>
+      <div id="alertSlot" style="margin-top:14px"></div>
+    </div>
+  </div>
+
+  <section class="block" aria-labelledby="h-results">
+    <h2 id="h-results">Test run results</h2>
+    <div class="stats">
+      <div class="stat"><b class="num">7</b><span>incoming messages from web form, Instagram and Telegram</span></div>
+      <div class="stat"><b class="num">6</b><span>contacts, 6 personal welcome messages</span></div>
+      <div class="stat hot"><b class="num">3</b><span>buying leads sent to sales</span></div>
+      <div class="stat"><b class="num">1</b><span>duplicate caught, no second reply</span></div>
+      <div class="stat"><b class="num">0</b><span>errors</span></div>
+      <div class="stat"><b class="num">~3s</b><span>to analyze each message</span></div>
+    </div>
+    <p class="note">Run on an ordinary laptop with a free, open-source AI model. Faster on a server or with cloud models.</p>
+  </section>
+
+  <section class="block" aria-labelledby="h-how">
+    <h2 id="h-how">What happens behind the scenes</h2>
+    <ol class="steps">
+      <li><h3>Message arrives</h3><p>Instagram DM, website form or messenger: wherever your customers are.</p></li>
+      <li><h3>Duplicate check</h3><p>Already welcomed? They won't get the same message twice.</p></li>
+      <li><h3>AI analysis</h3><p>Intent (buying / question / just browsing), name and topic of interest.</p></li>
+      <li><h3>Lead saved</h3><p>Everything goes into a database, ready for follow-up and reporting.</p></li>
+      <li><h3>Personal reply</h3><p>From a template you write, filled in with that customer's name and need.</p></li>
+      <li class="hot"><h3>Sales alert</h3><p>Only for serious buyers, with a ready-made summary.</p></li>
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="h-safe">
+    <h2 id="h-safe">Built for real-world use</h2>
+    <div class="grid2">
+      <div class="card"><h3>One welcome per customer</h3><p>An email typed with different capitals, or a phone number written with or without spaces and dashes, still counts as one person. Saved first, sent second, so a dropped connection never causes a double message.</p></div>
+      <div class="card"><h3>AI errors don't become wrong replies</h3><p>If analysis fails for a message, that customer doesn't get a generic reply. They're retried on the next run instead.</p></div>
+      <div class="card"><h3>Protected against abuse</h3><p>Only requests carrying a valid Meta signature are accepted. Instructions someone types inside their message are never followed.</p></div>
+      <div class="card"><h3>A full log of every run</h3><p>Every message, decision and reply is recorded with a timestamp, so you always know what happened.</p></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="h-yours">
+    <h2 id="h-yours">In your brand's voice</h2>
+    <p class="lead">Message wording lives in one plain file you can edit without any coding: a separate text for each type of customer, with blanks for their name and interest.</p>
+    <div class="split">
+<pre class="code" aria-label="Sample message template"><span class="k">## buying</span>
+Hi <span class="h">{name}</span> 🌟
+We've received your request about "<span class="h">{interest}</span>".
+One of our sales advisors will contact you shortly.
+
+<span class="k">## question</span>
+Hi <span class="h">{name}</span> 👋 Welcome to <span class="h">{brand}</span>!
+<span class="c">…</span></pre>
+<pre class="code" aria-label="Sample run log"><span class="c">13:10:58</span> <span class="k">pipeline</span> New contact ig:IGDEMO_PRIYA (Instagram DM)
+<span class="c">13:10:58</span> <span class="k">pipeline</span> intent=<span class="h">buying</span> conf=0.95
+<span class="c">13:10:58</span> <span class="k">pipeline</span> Saved to database ✓
+<span class="c">13:10:58</span> <span class="k">pipeline</span> Welcome message → sent
+<span class="c">13:10:58</span> <span class="k">pipeline</span> <span class="h">🔥 Sales alert</span>
+<span class="c">13:11:11</span> <span class="k">pipeline</span> Second message, same person → skipped</pre>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="h-connect">
+    <h2 id="h-connect">Connects to your channels</h2>
+    <div class="chips">
+      <span class="chip">Instagram DMs <small>Ready</small></span>
+      <span class="chip">Website forms <small>Ready</small></span>
+      <span class="chip">Telegram <small class="soon">Available</small></span>
+      <span class="chip">WhatsApp Business <small class="soon">Available</small></span>
+      <span class="chip">Email <small class="soon">Available</small></span>
+    </div>
+    <p class="lead">The AI engine is your choice too: Claude for the highest accuracy, or an open-source model on your own server so customer data never leaves your systems. It works in English and Persian.</p>
+  </section>
+
+  <footer>
+    <h2>Want this running on your account?</h2>
+    <p>SYNIQ AI sets up and tunes this assistant for your brand voice, products and channels.</p>
+    <p class="fine">Names and messages on this page are test samples and don't belong to real people. The analyses and replies are the system's real output on these samples.</p>
+  </footer>
+
+</div>
+
+<script>
+const SAMPLES = __DATA__;
+const INTENT_LABEL = { buying: "Ready to buy", question: "Question", other: "Browsing / unclear" };
+const CHANNEL_LABEL = { website_form: "Website form", instagram_dm: "Instagram DM", telegram: "Telegram" };
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+const picker = document.getElementById("picker");
+const flow = document.getElementById("flow");
+const alertSlot = document.getElementById("alertSlot");
+const stageWrap = document.getElementById("stageWrap");
+
+function render(i, animate) {
+  const s = SAMPLES[i];
+  picker.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
+  const ch = CHANNEL_LABEL[s.channel] || s.channel;
+  const incoming = `
+    <div class="panel stage">
+      <div class="label"><i>1</i> Incoming message</div>
+      <div class="bubble">${esc(s.message)}</div>
+      <div class="meta"><span>${esc(ch)}</span>${s.from ? `<span>${esc(s.from)}</span>` : ""}</div>
+    </div>`;
+
+  if (s.duplicate) {
+    flow.innerHTML = incoming + `
+      <div class="panel stage">
+        <div class="label"><i>2</i> Duplicate check</div>
+        <span class="pill other">Duplicate</span>
+        <p style="font-size:14.5px">This person wrote a few minutes ago and was already welcomed. ${esc(s.dupReason)}</p>
+        <p class="muted" style="font-size:13px">The AI isn't called at all, so it costs nothing.</p>
+      </div>
+      <div class="panel stage">
+        <div class="label"><i>3</i> Automatic reply</div>
+        <p class="muted" style="font-size:14.5px">No second welcome is sent. Your sales team picks up the conversation.</p>
+      </div>`;
+    alertSlot.innerHTML = `<div class="alert block stage">Duplicate blocked. The customer never sees the same welcome twice.</div>`;
+  } else {
+    const json = JSON.stringify({ intent: s.intent, name: s.name, interest: s.interest, confidence: s.confidence }, null, 2);
+    flow.innerHTML = incoming + `
+      <div class="panel stage">
+        <div class="label"><i>2</i> AI analysis</div>
+        <span class="pill ${s.intent}">${INTENT_LABEL[s.intent]}</span>
+        <dl class="kv">
+          <dt>Name</dt><dd>${esc(s.name) || '<span class="muted">not given</span>'}</dd>
+          <dt>Interest</dt><dd>${esc(s.interest) || '<span class="muted">not clear</span>'}</dd>
+          <dt>Confidence</dt><dd class="num">${Math.round(s.confidence * 100)}%<div class="bar"><span style="width:${s.confidence * 100}%"></span></div></dd>
+        </dl>
+        <pre class="json">${esc(json)}</pre>
+      </div>
+      <div class="panel stage">
+        <div class="label"><i>3</i> Automatic reply</div>
+        <div class="bubble out">${esc(s.welcome)}</div>
+      </div>`;
+    alertSlot.innerHTML = s.intent === "buying"
+      ? `<div class="alert hot stage"><strong>🔥 New buying lead for sales</strong><span>${esc(s.summary)}</span></div>`
+      : `<div class="alert calm stage">Not a buyer yet. Welcomed and saved, without bothering the sales team.</div>`;
+  }
+  if (animate) { stageWrap.classList.remove("animate"); void stageWrap.offsetWidth; stageWrap.classList.add("animate"); }
+}
+
+SAMPLES.forEach((s, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "pick"; b.id = "pick-" + i;
+  b.innerHTML = `<span class="dot ${s.duplicate ? "dup" : s.intent}"></span>${esc(s.label)}`;
+  b.addEventListener("click", () => render(i, true));
+  picker.appendChild(b);
+});
+render(0, false);
+</script>
+</body>
+</html>

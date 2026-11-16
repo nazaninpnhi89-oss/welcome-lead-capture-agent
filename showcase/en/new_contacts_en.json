@@ -1,0 +1,23 @@
+[
+  {"id": "e-001", "channel": "website_form", "name": "", "email": "James.Carter@Example.com", "phone": "",
+   "message": "Hi, I'm James Carter, operations lead at Northwind Retail. We need DM automation for our 3 store Instagram accounts. Budget is around $2,000 and we want to launch before Black Friday. Could you send a quote?",
+   "received_at": "2026-11-09T09:12:00"},
+  {"id": "e-002", "channel": "instagram_dm", "ig_id": "IGDEMO_PRIYA", "name": "", "email": "", "phone": "",
+   "message": "hey! saw your reel 🙌 I'm Priya, I run a small skincare shop. how much is the starter package? want to set this up this month",
+   "received_at": "2026-11-09T10:03:00"},
+  {"id": "e-003", "channel": "instagram_dm", "ig_id": "IGDEMO_MARCO", "name": "Marco", "email": "", "phone": "",
+   "message": "Does your setup work with WhatsApp too? If you offer monthly payments I'd sign up this week.",
+   "received_at": "2026-11-09T10:40:00"},
+  {"id": "e-004", "channel": "website_form", "name": "Tom R.", "email": "tom.r@example.org", "phone": "",
+   "message": "Came across your LinkedIn post. Just curious what you actually do, no plans right now but it looked interesting.",
+   "received_at": "2026-11-09T11:20:00"},
+  {"id": "e-005", "channel": "telegram", "name": "", "email": "", "phone": "+44 7700 900123",
+   "message": "Hello, what are your support hours? Do you reply on weekends?",
+   "received_at": "2026-11-09T12:45:00"},
+  {"id": "e-006", "channel": "website_form", "name": "", "email": "hello@brightleaf.example", "phone": "",
+   "message": "hi",
+   "received_at": "2026-11-09T13:30:00"},
+  {"id": "e-007", "channel": "website_form", "name": "James Carter", "email": " james.carter@example.com", "phone": "",
+   "message": "Hello again, did my message come through? Still waiting on that quote.",
+   "received_at": "2026-11-09T14:05:00"}
+]

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دستیار خوش‌آمد SYNIQ AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Plan: پوستر فارسی (Lalezar) برای تیتر، Vazirmatn برای متن، Mono برای داده‌ی خام.
+   جوهری-نیلی آرام؛ تنها جای جسارت: زعفرانیِ «سرنخ داغ».
+   Layout: hero = دموی زنده (ورودی ← تحلیل ← پاسخ)، بعد عدد واقعی، خط پردازش، گاردریل‌ها. */
+:root {
+  --bg: #F2F3F7;
+  --surface: #FFFFFF;
+  --ink: #151A30;
+  --muted: #5D6480;
+  --line: #DCE0EB;
+  --accent: #3241B0;
+  --accent-soft: #E6E9FB;
+  --hot: #C96A12;
+  --hot-soft: #FCEBD8;
+  --ok: #1F7A4D;
+  --font-display: "Lalezar", "Vazirmatn", system-ui, sans-serif;
+  --font-body: "Vazirmatn", "Tahoma", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --r: 14px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1120; --surface: #171B2F; --ink: #E8EAF5; --muted: #9BA2BE; --line: #2A3050;
+    --accent: #8C99FF; --accent-soft: #232A52; --hot: #F2A65A; --hot-soft: #3A2A18; --ok: #5FD39A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1120; --surface: #171B2F; --ink: #E8EAF5; --muted: #9BA2BE; --line: #2A3050;
+  --accent: #8C99FF; --accent-soft: #232A52; --hot: #F2A65A; --hot-soft: #3A2A18; --ok: #5FD39A;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.85;
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4vw, 38px); line-height: 1.3; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+/* header */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 22px 0; }
+.brand { font-family: var(--font-mono); font-weight: 600; letter-spacing: .08em; direction: ltr; }
+.brand b { color: var(--accent); }
+.tag { font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; }
+
+/* hero */
+.hero { padding: 28px 0 8px; display: grid; gap: 14px; max-width: 780px; }
+.hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(38px, 6.4vw, 68px); line-height: 1.22; }
+.hero h1 em { font-style: normal; color: var(--hot); }
+.hero p { font-size: 18px; color: var(--muted); max-width: 62ch; }
+
+/* demo */
+.demo { margin: 34px 0 0; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 22px; display: grid; gap: 18px; }
+.demo-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; }
+.demo-head h3 { font-size: 17px; font-weight: 800; }
+.demo-head span { font-size: 13px; color: var(--muted); }
+.picker { display: flex; flex-wrap: wrap; gap: 8px; }
+.pick {
+  font: inherit; font-size: 14px; cursor: pointer; color: var(--ink);
+  background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
+  display: inline-flex; align-items: center; gap: 8px; transition: border-color .15s, background .15s;
+}
+.pick:hover { border-color: var(--accent); }
+.pick[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); font-weight: 700; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); flex: none; }
+.dot.buying { background: var(--hot); } .dot.question { background: var(--accent); } .dot.dup { background: transparent; border: 2px solid var(--muted); }
+
+.flow { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 14px; align-items: stretch; }
+.panel { border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 12px; align-content: start; background: var(--surface); position: relative; }
+.panel .label { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .02em; display: flex; gap: 8px; align-items: center; }
+.panel .label i { font-style: normal; font-family: var(--font-mono); background: var(--bg); border-radius: 6px; padding: 0 7px; }
+.bubble { background: var(--bg); border-radius: 16px 16px 16px 4px; padding: 12px 14px; font-size: 15px; }
+.bubble.out { background: var(--accent); color: #fff; border-radius: 16px 16px 4px 16px; white-space: pre-line; }
+:root[data-theme="dark"] .bubble.out { color: #0E1120; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bubble.out { color: #0E1120; } }
+.meta { font-size: 12px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; }
+
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; padding: 3px 12px; border-radius: 999px; width: fit-content; }
+.pill.buying { background: var(--hot-soft); color: var(--hot); }
+.pill.question { background: var(--accent-soft); color: var(--accent); }
+.pill.other { background: var(--bg); color: var(--muted); }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 14px; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; font-weight: 500; }
+.bar { height: 6px; background: var(--bg); border-radius: 99px; overflow: hidden; margin-top: 9px; }
+.bar span { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .5s ease; }
+.json { direction: ltr; text-align: left; font-family: var(--font-mono); font-size: 11.5px; line-height: 1.6; background: var(--bg); border-radius: 10px; padding: 10px 12px; margin: 0; overflow-x: auto; color: var(--muted); white-space: pre; }
+
+.alert { border-radius: var(--r); padding: 14px 16px; display: grid; gap: 4px; font-size: 14px; }
+.alert.hot { background: var(--hot-soft); border: 1px solid var(--hot); }
+.alert.hot strong { color: var(--hot); font-size: 15px; }
+.alert.calm { background: var(--bg); color: var(--muted); }
+.alert.block { background: var(--bg); border: 1px dashed var(--muted); }
+
+.stage { opacity: 1; transform: none; }
+.animate .stage { animation: rise .45s ease both; }
+.animate .stage:nth-child(2) { animation-delay: .12s; }
+.animate .stage:nth-child(3) { animation-delay: .24s; }
+.animate .alert.stage { animation-delay: .36s; }
+@keyframes rise { from { opacity: .0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .animate .stage { animation: none; } .bar span { transition: none; } }
+
+/* sections */
+section.block { padding: 64px 0 0; display: grid; gap: 24px; }
+.lead { max-width: 64ch; color: var(--muted); font-size: 17px; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 2px; }
+.stat b { font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1.2; }
+.stat.hot b { color: var(--hot); }
+.stat span { font-size: 14px; color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); }
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; counter-reset: s; }
+.steps li { counter-increment: s; padding: 0 0 0 14px; display: grid; gap: 6px; align-content: start; position: relative; }
+.steps li::before {
+  content: counter(s, persian); font-family: var(--font-display); font-size: 22px; color: var(--accent);
+  width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent-soft); position: relative; z-index: 1;
+}
+.steps li::after { content: ""; position: absolute; top: 21px; right: 42px; left: 0; height: 2px; background: var(--line); }
+.steps li:last-child::after { display: none; }
+.steps li.hot::before { background: var(--hot-soft); color: var(--hot); }
+.steps h3 { font-size: 16px; font-weight: 800; margin-top: 6px; }
+.steps p { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; display: grid; gap: 6px; align-content: start; }
+.card h3 { font-size: 16px; font-weight: 800; }
+.card p { font-size: 14.5px; color: var(--muted); }
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.code { direction: ltr; text-align: left; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.75; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; margin: 0; overflow-x: auto; white-space: pre; }
+.code .c { color: var(--muted); } .code .k { color: var(--accent); font-weight: 600; } .code .h { color: var(--hot); font-weight: 600; }
+.code .fa { direction: rtl; unicode-bidi: plaintext; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 14px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 5px 14px; display: inline-flex; gap: 8px; align-items: center; }
+.chip small { color: var(--ok); font-weight: 700; font-size: 12px; }
+.chip small.soon { color: var(--muted); font-weight: 500; }
+
+footer { margin: 72px 0 0; padding: 28px 0 40px; border-top: 1px solid var(--line); display: grid; gap: 8px; }
+footer h2 { font-size: clamp(24px, 3.4vw, 32px); }
+footer p { color: var(--muted); max-width: 64ch; }
+footer .fine { font-size: 13px; }
+
+@media (max-width: 900px) {
+  .flow { grid-template-columns: 1fr; }
+  .split { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; gap: 18px; }
+  .steps li { grid-template-columns: 42px 1fr; column-gap: 14px; padding: 0; }
+  .steps li::before { grid-row: span 2; }
+  .steps li::after { top: 42px; bottom: -18px; right: 20px; left: auto; width: 2px; height: auto; }
+  .steps h3 { margin-top: 8px; }
+}
+@media (max-width: 420px) { .demo { padding: 14px; } .wrap { padding: 0 16px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand"><b>SYNIQ</b> AI</div>
+    <div class="tag">نمونه‌کار · اتوماسیون فروش</div>
+  </header>
+
+  <div class="hero">
+    <h1>هر دایرکت، در چند ثانیه جواب می‌گیرد. <em>مشتری جدی</em> هم مستقیم به فروشنده می‌رسد.</h1>
+    <p>دستیار خوش‌آمد SYNIQ AI پیام هر مخاطب جدید را با هوش مصنوعی می‌خواند، نام و نیازش را درمی‌آورد، او را در دیتابیس ثبت می‌کند، پیام خوش‌آمد شخصی می‌فرستد و اگر قصد خرید داشت، همان لحظه به تیم فروش خبر می‌دهد.</p>
+  </div>
+
+  <div class="demo" id="demo">
+    <div class="demo-head">
+      <h3>امتحانش کنید: روی هر پیام بزنید</h3>
+      <span>خروجی واقعی سیستم روی پیام‌های نمونه</span>
+    </div>
+    <div class="picker" id="picker" role="group" aria-label="پیام‌های نمونه"></div>
+    <div id="stageWrap" class="animate">
+      <div class="flow" id="flow"></div>
+      <div id="alertSlot" style="margin-top:14px"></div>
+    </div>
+  </div>
+
+  <section class="block" aria-labelledby="h-results">
+    <h2 id="h-results">نتیجه‌ی اجرای آزمایشی</h2>
+    <div class="stats">
+      <div class="stat"><b class="num">۸</b><span>پیام ورودی از سایت، اینستاگرام و تلگرام</span></div>
+      <div class="stat"><b class="num">۶</b><span>مخاطب، ۶ پیام خوش‌آمد شخصی</span></div>
+      <div class="stat hot"><b class="num">۳</b><span>سرنخ خرید به فروشنده اعلام شد</span></div>
+      <div class="stat"><b class="num">۲</b><span>پیام تکراری، بدون پاسخ دوباره</span></div>
+      <div class="stat"><b class="num">۰</b><span>خطا</span></div>
+      <div class="stat"><b class="num">۷</b><span>ثانیه، زمان تقریبی تحلیل هر پیام</span></div>
+    </div>
+    <p class="note">اجرا روی یک لپ‌تاپ معمولی با مدل هوش مصنوعی متن‌باز و رایگان. روی سرور یا با مدل‌های ابری سریع‌تر است.</p>
+  </section>
+
+  <section class="block" aria-labelledby="h-how">
+    <h2 id="h-how">پشت صحنه چه اتفاقی می‌افتد</h2>
+    <ol class="steps">
+      <li><h3>دریافت پیام</h3><p>دایرکت اینستاگرام، فرم سایت یا پیام‌رسان؛ هر جا مشتری‌تان هست.</p></li>
+      <li><h3>چک تکراری</h3><p>اگر این آدم قبلاً جواب گرفته، دوباره پیام نمی‌گیرد.</p></li>
+      <li><h3>تحلیل با AI</h3><p>نیت (خرید / سؤال / کنجکاوی)، نام و موضوع علاقه.</p></li>
+      <li><h3>ثبت سرنخ</h3><p>همه‌چیز در دیتابیس، آماده برای پیگیری و گزارش.</p></li>
+      <li><h3>پیام شخصی</h3><p>از روی قالبی که خودتان می‌نویسید، با نام و نیاز همان مشتری.</p></li>
+      <li class="hot"><h3>خبر به فروشنده</h3><p>فقط برای مشتری‌های جدی، با خلاصه‌ی آماده.</p></li>
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="h-safe">
+    <h2 id="h-safe">برای کار واقعی ساخته شده</h2>
+    <div class="grid2">
+      <div class="card"><h3>هر مشتری فقط یک‌بار پیام می‌گیرد</h3><p>ایمیل با حروف متفاوت یا شماره با <span class="num">0912</span> و <span class="num">+98</span> هم یک نفر حساب می‌شود. اول ثبت، بعد ارسال؛ پس حتی با قطعی اینترنت هم پیام دوبار نمی‌رود.</p></div>
+      <div class="card"><h3>خطای AI به پیام اشتباه ختم نمی‌شود</h3><p>اگر تحلیل یک پیام شکست بخورد، آن مشتری پیام عمومی نمی‌گیرد و در نوبت بعد دوباره بررسی می‌شود.</p></div>
+      <div class="card"><h3>امن در برابر سوءاستفاده</h3><p>فقط درخواست‌هایی که امضای معتبر Meta دارند پذیرفته می‌شوند. دستورهایی که کسی داخل پیامش بنویسد اجرا نمی‌شود.</p></div>
+      <div class="card"><h3>گزارش کامل هر اجرا</h3><p>هر پیام، هر تصمیم و هر ارسال با ساعت ثبت می‌شود؛ همیشه می‌دانید چه اتفاقی افتاده.</p></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="h-yours">
+    <h2 id="h-yours">با لحن برند خودتان</h2>
+    <p class="lead">متن پیام‌ها در یک فایل ساده است که بدون برنامه‌نویسی ویرایش می‌شود: برای هر نوع مشتری یک متن جدا، با جای خالی برای نام و موضوع علاقه.</p>
+    <div class="split">
+<pre class="code" aria-label="نمونه‌ی قالب پیام"><span class="k">## buying</span>
+<span class="fa">سلام <span class="h">{name}</span> عزیز 🌟</span>
+<span class="fa">درخواست شما درباره‌ی «<span class="h">{interest}</span>» را دریافت کردیم</span>
+<span class="fa">و یکی از مشاوران فروش ما به‌زودی تماس می‌گیرد.</span>
+
+<span class="k">## question</span>
+<span class="fa">سلام <span class="h">{name}</span> عزیز 👋 به <span class="h">{brand}</span> خوش آمدید!</span>
+<span class="c">…</span></pre>
+<pre class="code" aria-label="نمونه‌ی گزارش اجرا"><span class="c">12:33:00</span> <span class="k">webhook</span>  <span class="fa">📩 دایرکت جدید از IGUSER777</span>
+<span class="c">12:33:07</span> <span class="k">pipeline</span> intent=<span class="h">buying</span> conf=0.95
+<span class="c">12:33:07</span> <span class="k">pipeline</span> <span class="fa">ثبت در دیتابیس ✓</span>
+<span class="c">12:33:07</span> <span class="k">pipeline</span> <span class="fa">پیام خوش‌آمد ← ارسال شد</span>
+<span class="c">12:33:07</span> <span class="k">pipeline</span> <span class="h fa">🔥 اعلان فروشنده</span>
+<span class="c">12:33:07</span> <span class="k">pipeline</span> <span class="fa">پیام دوم همان شخص ← رد شد (تکراری)</span></pre>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="h-connect">
+    <h2 id="h-connect">به کانال‌های شما وصل می‌شود</h2>
+    <div class="chips">
+      <span class="chip">دایرکت اینستاگرام <small>آماده</small></span>
+      <span class="chip">فرم سایت <small>آماده</small></span>
+      <span class="chip">تلگرام <small class="soon">قابل اتصال</small></span>
+      <span class="chip">واتس‌اپ بیزینس <small class="soon">قابل اتصال</small></span>
+      <span class="chip">ایمیل <small class="soon">قابل اتصال</small></span>
+    </div>
+    <p class="lead">موتور هوش مصنوعی هم انتخابی است: Claude برای بالاترین دقت در فارسی، یا مدل متن‌باز روی سرور خودتان تا اطلاعات مشتری‌ها از سیستم شما خارج نشود.</p>
+  </section>
+
+  <footer>
+    <h2>می‌خواهید روی پیج شما راه بیفتد؟</h2>
+    <p>SYNIQ AI این دستیار را با لحن، محصولات و کانال‌های کسب‌وکار شما تنظیم و راه‌اندازی می‌کند.</p>
+    <p class="fine">نام‌ها و پیام‌های این صفحه نمونه‌ی آزمایشی‌اند و به افراد واقعی تعلق ندارند. تحلیل‌ها و پاسخ‌ها خروجی واقعی سیستم روی همین نمونه‌ها هستند.</p>
+  </footer>
+
+</div>
+
+<script>
+const SAMPLES = __DATA__;
+const INTENT_FA = { buying: "قصد خرید", question: "سؤال", other: "کنجکاو / نامشخص" };
+const CHANNEL_FA = { website_form: "فرم سایت", instagram_dm: "دایرکت اینستاگرام", telegram: "تلگرام" };
+const fa = s => String(s).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+const picker = document.getElementById("picker");
+const flow = document.getElementById("flow");
+const alertSlot = document.getElementById("alertSlot");
+const stageWrap = document.getElementById("stageWrap");
+
+function render(i, animate) {
+  const s = SAMPLES[i];
+  picker.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
+  const ch = CHANNEL_FA[s.channel] || s.channel;
+  const incoming = `
+    <div class="panel stage">
+      <div class="label"><i>۱</i> پیام ورودی</div>
+      <div class="bubble">${esc(s.message)}</div>
+      <div class="meta"><span>${esc(ch)}</span>${s.from ? `<span dir="auto">${esc(s.from)}</span>` : ""}</div>
+    </div>`;
+
+  if (s.duplicate) {
+    flow.innerHTML = incoming + `
+      <div class="panel stage">
+        <div class="label"><i>۲</i> چک تکراری</div>
+        <span class="pill other">تکراری</span>
+        <p style="font-size:14.5px">این شخص چند دقیقه پیش پیام داده و خوش‌آمد گرفته است. ${esc(s.dupReason)}</p>
+        <p class="muted" style="font-size:13px">هوش مصنوعی صدا زده نمی‌شود؛ هزینه‌ای هم ندارد.</p>
+      </div>
+      <div class="panel stage">
+        <div class="label"><i>۳</i> پاسخ خودکار</div>
+        <p class="muted" style="font-size:14.5px">پاسخ دوباره‌ای ارسال نمی‌شود. مکالمه را فروشنده ادامه می‌دهد.</p>
+      </div>`;
+    alertSlot.innerHTML = `<div class="alert block stage">جلوی پیام تکراری گرفته شد. مشتری دو بار یک پیام خوش‌آمد نمی‌بیند.</div>`;
+  } else {
+    const json = JSON.stringify({ intent: s.intent, name: s.name, interest: s.interest, confidence: s.confidence }, null, 2);
+    flow.innerHTML = incoming + `
+      <div class="panel stage">
+        <div class="label"><i>۲</i> تحلیل هوش مصنوعی</div>
+        <span class="pill ${s.intent}">${INTENT_FA[s.intent]}</span>
+        <dl class="kv">
+          <dt>نام</dt><dd dir="auto">${esc(s.name) || '<span class="muted">در پیام نیامده</span>'}</dd>
+          <dt>علاقه</dt><dd>${esc(s.interest) || '<span class="muted">مشخص نیست</span>'}</dd>
+          <dt>اطمینان</dt><dd class="num">${fa(Math.round(s.confidence * 100))}٪<div class="bar"><span style="width:${s.confidence * 100}%"></span></div></dd>
+        </dl>
+        <pre class="json">${esc(json)}</pre>
+      </div>
+      <div class="panel stage">
+        <div class="label"><i>۳</i> پاسخ خودکار</div>
+        <div class="bubble out">${esc(s.welcome)}</div>
+      </div>`;
+    alertSlot.innerHTML = s.intent === "buying"
+      ? `<div class="alert hot stage"><strong>🔥 سرنخ خرید جدید برای تیم فروش</strong><span>${esc(s.summary)}</span></div>`
+      : `<div class="alert calm stage">قصد خرید ندارد. فقط خوش‌آمد گرفت و ثبت شد؛ مزاحم تیم فروش نمی‌شود.</div>`;
+  }
+  if (animate) { stageWrap.classList.remove("animate"); void stageWrap.offsetWidth; stageWrap.classList.add("animate"); }
+}
+
+SAMPLES.forEach((s, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "pick"; b.id = "pick-" + i;
+  b.innerHTML = `<span class="dot ${s.duplicate ? "dup" : s.intent}"></span>${esc(s.label)}`;
+  b.addEventListener("click", () => render(i, true));
+  picker.appendChild(b);
+});
+render(0, false);
+</script>
+</body>
+</html>
