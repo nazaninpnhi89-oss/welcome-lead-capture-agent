@@ -1,0 +1,4 @@
+# Demo pages are generated output, not source: keep the repo language as Python
+docs/** linguist-generated
+showcase/**/*.html linguist-generated
+showcase/en/_css.txt linguist-generated
