@@ -2,6 +2,8 @@
 
 **English** · [فارسی](README.fa.md)
 
+[![tests](https://github.com/nazaninpnhi89-oss/welcome-lead-capture-agent/actions/workflows/tests.yml/badge.svg)](https://github.com/nazaninpnhi89-oss/welcome-lead-capture-agent/actions/workflows/tests.yml)
+
 An AI agent that answers every new contact (website form or Instagram DM) within seconds: it reads the message, works out what the person wants, saves them as a lead, sends a personal welcome, and pings the sales team when someone is ready to buy.
 
 Built for small businesses that lose leads because nobody replies in time. The primary market is Persian-speaking, so the code comments and default message template are in Persian; the pipeline itself is language-aware and handles English messages too.
